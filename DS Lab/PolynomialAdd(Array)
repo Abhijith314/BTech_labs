@@ -1,0 +1,93 @@
+#include<stdio.h>
+void read();
+struct poly
+{
+int cof,exp;
+}p1[10],p2[10],p3[10];
+int n,n1,n2,i,j,k;
+void main()
+{
+read();
+i=0;
+j=0;
+k=0;
+while((i<n1)&&(j<n2))
+{
+if(p1[i].exp==p2[j].exp)
+{
+p3[k].exp=p1[i].exp;
+p3[k].cof=p1[i].cof+p2[j].cof;
+i++;
+j++;
+k++;
+}
+else if(p1[i].exp>p2[j].exp)
+{
+p3[k].exp=p1[i].exp;
+p3[k].cof=p1[i].cof;
+k++;
+i++;
+}
+else
+{
+p3[k].exp=p2[j].exp;
+p3[k].cof=p2[j].cof;
+k++;
+j++;
+}
+}
+while(i<n1)
+{
+p3[k].exp=p1[i].exp;
+p3[k].cof=p1[i].cof;
+k++;
+i++;
+}
+while(j<n2)
+{
+p3[k].exp=p2[j].exp;
+p3[k].cof=p2[j].cof;
+k++;
+j++;
+}
+n=k;
+printf("\n\nThe resultant polynomial is : ");
+for(k=0;k<n;k++)
+{
+printf("%dx^%d",p3[k].cof,p3[k].exp);
+if(k!=n-1)
+printf("+");
+}
+printf("\n");
+}
+void read()
+{
+printf("Enter the no of terms of 1st exp : ");
+scanf("%d",&n1);
+printf("Enter the coefficient and exponent : ");
+for(i=0;i<n1;i++)
+{
+scanf("%d %d",&p1[i].cof,&p1[i].exp);
+}
+printf("The first polinomial is : ");
+for(i=0;i<n1;i++)
+{
+printf("%dx^%d",p1[i].cof,p1[i].exp);
+if(i!=n1-1)
+printf("+");
+}
+printf("\nEnter the no of terms of 2nd exp : ");
+scanf("%d",&n2);
+printf("Enter the coefficient and exponent : ");
+for(j=0;j<n2;j++)
+{
+scanf("%d %d",&p2[j].cof,&p2[j].exp);
+}
+printf("The second polinomial is : ");
+for(j=0;j<n2;j++)
+{
+printf("%dx^%d",p2[j].cof,p2[j].exp);
+if(j!=n2-1)
+printf("+");
+}
+}

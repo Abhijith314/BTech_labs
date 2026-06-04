@@ -1,0 +1,64 @@
+#include<stdio.h>
+#define size 3
+void push();
+void pop();
+void traversal();
+int stack[size],top=-1;
+void main()
+{
+int option,y;
+do{
+printf("\t\t\tMENU\n\n\n1: PUSH\n2: POP\n3: TRAVERSAL\n");
+printf("Enter the option : ");
+scanf("%d",&option);
+switch(option)
+{
+case 1:
+push();
+break;
+case 2:
+pop();
+break;
+case 3:
+traversal();
+break;
+}
+printf("Do you want to continue press '1' for YES '0' for NO : ");
+scanf("%d",&y);
+}while(y==1);
+}
+void push()
+{
+if(top==size-1)
+printf("Stack overflow\n");
+else
+{
+printf("Enter the element :");
+top=top+1;
+scanf("%d",&stack[top]);
+}
+}
+void pop()
+{
+if(top==-1)
+printf("Stack underfow\n");
+else
+{
+printf("The deleted element is : %d\n",stack[top]);
+top=top-1;
+}
+}
+void traversal()
+{
+int i;
+if(top==-1)
+printf("Stack underflow\n");
+else
+{
+for(i=top;i>=0;i--)
+{
+printf("%d\t",stack[i]);
+}
+printf("\n");
+}
+}

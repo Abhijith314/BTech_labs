@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+void dfs(int start);
+int total,i,j,graph[10][10],visited[10]={0},stack[10];
+static int k=0,count=0;
+int main()
+{
+printf("Enter the total number of vertices : ");
+scanf("%d",&total);
+printf("Enter the adjacency matrix :\n");
+for(i=0;i<total;i++){
+for(j=0;j<total;j++){
+scanf("%d",&graph[i][j]);
+}
+}
+printf("DFS is : ");
+dfs(0);
+return 0;
+}
+void dfs(int start)
+{
+int flag=0;
+count++;
+printf("%d ",start);
+visited[start]=1;
+for(i=0;i<total;i++){
+if(!visited[i] && graph[start][i]==1){
+stack[++k]=i;
+flag=1;
+}
+if(count==total){
+exit(0);
+}
+}
+if(flag==1)
+dfs(stack[k]);
+else
+k--;
+dfs(stack[k]);
+}

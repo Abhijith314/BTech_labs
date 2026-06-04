@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node *minvalues(struct node *node);
+struct node *delnode(struct node *tree,int data);
+struct node *insert(struct node *tree,int data);
+void inorder(struct node *tree);
+void preorder(struct node *tree);
+void postorder(struct node *tree);
+struct node{
+int data;
+struct node *rc,*lc;
+}*root,*tree,*temp;
+void main()
+{
+int n,ch,a;
+do{
+printf("\t\tMENU\n1: Insert\n2: Delete\n3: Inorder\n4: Postorder\n5: Preorder\n");
+printf("Enter the option:");
+scanf("%d",&ch);
+switch(ch){
+case 1:printf("Enter the element:");
+scanf("%d",&n);
+root=insert(root,n);
+break;
+case 2:printf("Enter the element:");
+scanf("%d",&n);
+root=delnode(root,n);
+break;
+case 3:printf("Tree :");
+inorder(root);
+break;
+case 4:printf("Tree :");
+postorder(root);
+break;
+case 5:printf("Tree :");
+preorder(root);
+break;
+}
+printf("\nExit? (1/0) :");
+scanf("%d",&a);
+}while(a==1);
+}
+struct node *minvalues(struct node *node)
+{
+struct node *c=node;
+while(c->lc!=NULL)
+{
+c=c->lc;
+return c;
+}
+}
+struct node *delnode(struct node *tree,int data)
+{
+if(tree==NULL)
+return tree;
+else if(data < tree->data)
+tree->lc=delnode(tree->lc,data);
+else if(data > tree->data)
+tree->rc=delnode(tree->rc,data);
+else
+{
+if(tree->lc==NULL)
+{
+struct node *temp=tree->rc;
+free(tree);
+return temp;
+}
+else if(tree->rc==NULL)
+{
+struct node *temp=tree->lc;
+free(tree);
+return temp;
+}
+struct node *temp=minvalues(tree->rc);
+tree->data=temp->data;
+tree->rc=delnode(tree->rc,tree->data);
+}
+return tree;
+}
+struct node *insert(struct node *tree,int data)
+{
+if(tree==NULL)
+{
+tree=(struct node *)malloc(sizeof(struct node));
+tree->data=data;
+tree->rc=NULL;
+tree->lc=NULL;
+return tree;
+}
+else if(tree->data > data)
+{
+tree->lc=insert(tree->lc,data);
+return tree;
+}
+else if(tree->data < data)
+{
+tree->rc=insert(tree->rc,data);
+return tree;
+}
+}
+void inorder(struct node *tree)
+{
+if(tree!=NULL)
+{
+inorder(tree->lc);
+printf("%d\t",tree->data);
+inorder(tree->rc);
+}
+}
+void preorder(struct node *tree)
+{
+if(tree!=NULL)
+{
+printf("%d\t",tree->data);
+preorder(tree->lc);
+preorder(tree->rc);
+}
+}
+void postorder(struct node *tree)
+{
+if(tree!=NULL)
+{
+postorder(tree->lc);
+postorder(tree->rc);
+printf("%d\t",tree->data);
+}
+}

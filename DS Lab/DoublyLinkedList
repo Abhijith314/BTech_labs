@@ -1,0 +1,267 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+int data;
+struct node *next,*prev;
+}*head,*list,*temp,*before;
+void inend();
+void inbegin();
+void inafter();
+void inbefore();
+void delend();
+void delbegin();
+void delparticular();
+void ftraversal();
+void btraversal();
+void main()
+{
+int option,y;
+do{
+printf("\t\t\tMENU\n\n");
+printf("1 : Insertion through end\n2 : Insertion through beginning\n3 : Insertion after a given element\n4 : Insertion before a given element\n5 : Deletion from end\n6 : Deletion from beginning\n7 : Deletion of particular element\n8 : Forward Traversal\n9 : Backowrd Traversal");
+printf("\nEnter the option : ");
+scanf("%d",&option);
+switch(option)
+{
+case 1: 
+inend();
+break;
+case 2:
+inbegin();
+break;
+case 3:
+inafter();
+break;
+case 4:
+inbefore();
+break;
+case 5:
+delend();
+break;
+case 6:
+delbegin();
+break;
+case 7:
+delparticular();
+break;
+case 8:
+ftraversal();
+break;
+case 9:
+btraversal();
+break;
+default :
+printf("Invalid option");
+break;
+}
+printf("Do you want to continue : ");
+scanf("%d",&y);
+}while(y==1);
+}
+void inend()
+{
+temp=(struct node *)malloc(sizeof(struct node));
+if(temp==NULL)
+printf("Overflow");
+else
+{
+printf("Enter the data : ");
+scanf("%d",&temp->data);
+temp->next=NULL;
+temp->prev=NULL;
+if(head==NULL)
+head=temp;
+else
+{
+list=head;
+while(list->next!=NULL)
+{
+list=list->next;
+}
+list->next=temp;
+temp->prev=list;
+}
+}
+}
+void inbegin()
+{
+temp=(struct node *)malloc(sizeof(struct node));
+if(temp==NULL)
+printf("Overflow");
+else
+{
+printf("Enter the data : ");
+scanf("%d",&temp->data);
+temp->next=NULL;
+temp->prev=NULL;
+if(head==NULL)
+head=temp;
+else
+{
+list=head;
+temp->next=list;
+list->prev=temp;
+head=temp;
+}
+}
+}
+void inafter()
+{
+int key;
+temp=(struct node *)malloc(sizeof(struct node));
+if(temp==NULL)
+printf("Overflow");
+else
+{
+printf("Enter the data : ");
+scanf("%d",&temp->data);
+temp->next=NULL;
+temp->prev=NULL;
+if(head==NULL)
+head=temp;
+else
+{
+printf("Enter the search element : ");
+scanf("%d",&key);
+list=head;
+while(list->data!=key)
+{
+list=list->next;
+}
+temp->next=list->next;
+temp->prev=list;
+list->next->prev=temp;
+list->next=temp;
+}
+}
+}
+void inbefore()
+{
+int key;
+temp=(struct node *)malloc(sizeof(struct node));
+if(temp==NULL)
+printf("Overflow");
+else
+{
+printf("Enter the data : ");
+scanf("%d",&temp->data);
+temp->next=NULL;
+temp->prev=NULL;
+if(head==NULL)
+head=temp;
+else
+{
+printf("Enter the search element : ");
+scanf("%d",&key);
+list=head;
+while(list->data!=key)
+{
+before=list;
+list=list->next;
+}
+temp->next=list;
+list->prev=temp;
+temp->prev=before;
+before->next=temp;
+}
+}
+}
+void delend()
+{
+list=head;
+if(head==NULL)
+printf("Underflow");
+else if(list->next==NULL)
+{
+printf("The deleted data is : %d\n",list->data);
+head=NULL;
+free(list);
+}
+else
+{
+while(list->next!=NULL)
+{
+before=list;
+list=list->next;
+}
+printf("The deleted data is : %d\n",list->data);
+free(list);
+before->next=NULL;
+}
+}
+void delbegin()
+{
+list=head;
+if(head==NULL)
+printf("Underflow");
+else if(list->next==NULL)
+{
+printf("The deleted data is : %d\n",list->data);
+head=NULL;
+free(list);
+}
+else
+{
+list->next->prev=NULL;
+head=list->next;
+printf("The deleted data is : %d\n",list->data);
+free(list);
+}
+}
+void delparticular()
+{
+int key;
+if(head==NULL)
+printf("Underflow");
+else
+{
+printf("Enter the search element : ");
+scanf("%d",&key);
+list=head;
+while(list->data!=key)
+{
+before=list;
+list=list->next;
+}
+before->next=list->next;
+list->next->prev=before;
+printf("The deleted data is : %d\n",list->data);
+free(list);
+}
+}
+void ftraversal()
+{
+if(head==NULL)
+printf("Underflow");
+else
+{
+list=head;
+printf("The datas are : ");
+while(list->next!=NULL)
+{
+printf("%d\t",list->data);
+list=list->next;
+}
+printf("%d\n",list->data);
+}
+}
+void btraversal()
+{
+if(head==NULL)
+printf("Underflow");
+else
+{
+list=head;
+while(list->next!=NULL)
+{
+list=list->next;
+}
+printf("The datas are : ");
+while(list->prev!=NULL)
+{
+printf("%d\t",list->data);
+list=list->prev;
+}
+printf("%d\n",list->data);
+}
+}

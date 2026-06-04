@@ -1,0 +1,25 @@
+#include<stdio.h>
+void bfs(int start);
+int total,i,j,graph[10][10],visited[10]={0};
+int main()
+{
+printf("Enter the total number of vertices : ");
+scanf("%d",&total);
+printf("Enter the adjacency matrix :\n");
+for(i=0;i<total;i++){
+for(j=0;j<total;j++){
+scanf("%d",&graph[i][j]);
+}
+}
+printf("BFS is : ");
+bfs(0);
+return 0;
+}
+void bfs(int start)
+{
+printf("%d ",start);
+visited[start]=1;
+for(i=0;i<total;i++)
+if(!visited[i] && graph[start][i]==1)
+bfs(i);
+}

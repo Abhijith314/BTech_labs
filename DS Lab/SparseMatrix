@@ -1,0 +1,75 @@
+#include<stdio.h>
+int fnsparse(int a[10][10],int m,int n);
+void display();
+void transpose();
+int a[10][10],sparse[10][10],i,j,m,n,srow;
+void main()
+{
+printf("Enter the no. of rows & columns : ");
+scanf("%d %d",&m,&n);
+printf("Enter the elements : ");
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+{
+scanf("%d",&a[i][j]);
+}
+}
+printf("\nThe matrix is : \n");
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+{
+printf("%d\t",a[i][j]);
+}
+printf("\n");
+}
+fnsparse(a,m,n);
+display();
+transpose();
+}
+int fnsparse(int a[10][10],int m,int n)
+{
+sparse[0][0]=m;
+sparse[0][1]=n;
+srow=1;
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+{
+if(a[i][j]!=0)
+{
+sparse[srow][0]=i;
+sparse[srow][1]=j;
+sparse[srow][2]=a[i][j];
+srow++;
+}
+}
+}
+sparse[0][2]=srow-1;
+printf("\nThe sparse matrix is :\n");
+return srow;
+}
+void display()
+{
+for(i=0;i<srow;i++)
+{
+for(j=0;j<3;j++)
+{
+printf("%d\t",sparse[i][j]);
+}
+printf("\n");
+}
+}
+void transpose()
+{
+int temp;
+for(i=0;i<srow;i++)
+{
+temp=sparse[i][0];
+sparse[i][0]=sparse[i][1];
+sparse[i][1]=temp;
+}
+printf("\nThe transposed matrix is :\n");
+display();
+}

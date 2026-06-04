@@ -1,0 +1,51 @@
+#include<stdio.h>
+void quick(int a[10],int lower,int upper);
+int a[10],i,j,n;
+void main()
+{
+printf("Enter the number of elements : ");
+scanf("%d",&n);
+printf("Enter the elements : ");
+for(i=0;i<n;i++)
+{
+scanf("%d",&a[i]);
+}
+quick(a,0,n-1);
+printf("\nThe sorted elements are : ");
+for(i=0;i<n;i++)
+{
+printf("%d\t",a[i]);
+}
+printf("\n");
+}
+void quick(int a[10],int lower,int upper)
+{
+int pivot,p,q,temp;
+if(lower<=upper)
+{
+pivot=lower;
+p=lower+1;
+q=upper;
+while(p<=q)
+{
+while(a[p]<=a[pivot]&&p<=upper)
+{p++;}
+while(a[q]>a[pivot])
+{q--;}
+if(p<=q)
+{
+temp=a[p];
+a[p]=a[q];
+a[q]=temp;
+}
+else
+{
+temp=a[pivot];
+a[pivot]=a[q];
+a[q]=temp;
+}
+}
+quick(a,lower,q-1);
+quick(a,q+1,upper);
+}
+}

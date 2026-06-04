@@ -1,0 +1,65 @@
+#include<stdio.h>
+void mergesort(int a[],int beg,int end);
+void merge(int a[],int beg,int mid,int end);
+int beg,mid,end,i,j,k,n;
+int a[10],temp[10];
+void main()
+{
+printf("Enter the size of array :");
+scanf("%d",&n);
+printf("Enter the elements : ");
+for(i=0;i<n;i++)
+{
+scanf("%d",&a[i]);
+}
+printf("The sorted array is : ");
+mergesort(a,0,n);
+for(i=0;i<n;i++)
+{
+printf("%d",a[i]);
+}
+}
+void mergesort(int a[n],int beg,int end)
+{
+if(beg<end)
+{
+mid=(beg+end)/2;
+mergesort(a,beg,mid);
+mergesort(a,mid+1,end);
+merge(a,beg,mid,end);
+}
+}
+void merge(int a[n],int beg,int mid,int end)
+{
+i=beg;
+j=mid+1;
+int index=0;
+while(i<=mid && j<=end)
+{
+if(a[i]<a[j])
+{
+temp[index]=a[i];
+i++;
+}
+else
+{
+temp[index]=a[j];
+j++;
+}
+index++;
+}
+if(i>mid)
+{
+while(j<=end)
+{
+temp[index]=a[j];
+index++;
+}
+}
+k=0;
+while(k<index)
+{
+a[k]=temp[k];
+k++;
+}
+}

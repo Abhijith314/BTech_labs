@@ -1,0 +1,80 @@
+#include<stdio.h>
+#define size 3
+void enqueue();
+void dequeue();
+void traversal();
+int queue[size],f=-1,r=-1;
+void main()
+{
+int option,y;
+do{
+printf("\t\t\tMENU\n\n\n1: ENQUEUE\n2: DEQUEUE\n3: TRAVERSAL\n");
+printf("Enter the option : ");
+scanf("%d",&option);
+switch(option)
+{
+case 1:
+enqueue();
+break;
+case 2:
+dequeue();
+break;
+case 3:
+traversal();
+break;
+default:
+printf("Invalid option");
+break;
+}
+printf("Do you want to continue press '1' for YES '0' for NO : ");
+scanf("%d",&y);
+}while(y==1);
+}
+void enqueue()
+{
+if(r==size-1)
+printf("Queue overflow\n");
+else if(f==-1&&r==-1)
+{
+f=f+1;
+r=r+1;
+printf("Enter the element : ");
+scanf("%d",&queue[r]);
+}
+else
+{
+r=r+1;
+printf("Enter the element : ");
+scanf("%d",&queue[r]);
+}
+}
+void dequeue()
+{
+if(f==-1&&r==-1)
+printf("Queue underfow\n");
+else if(f==r)
+{
+printf("The deleted element is : %d\n",queue[f]);
+r=-1;
+f=-1;
+}
+else
+{
+printf("The deleted element is : %d\n",queue[f]);
+f=f+1;
+}
+}
+void traversal()
+{
+int i;
+if(f==-1&&r==-1)
+printf("Queue underflow\n");
+else
+{
+for(i=f;i<=r;i++)
+{
+printf("%d\t",queue[i]);
+}
+printf("\n");
+}
+}

@@ -1,0 +1,101 @@
+#include<stdio.h>
+#include<string.h>
+#define size 5
+char infix[50],postfix[50];
+int top=-1,stack[size];
+void push(char);
+int pop();
+void intopostfix();
+int prece(char);
+void main()
+{
+int i;
+printf("Ente the expession : ");
+for(i=0;i<size;i++)
+{
+scanf(" %c",&infix[i]);
+}
+push('#');
+intopostfix();
+}
+void intopostfix()
+{
+char symbol,item;
+int pos=0,l,i;
+l=strlen(infix);
+for(i=0;i<l;i++)
+{
+symbol=infix[i];
+switch (symbol)
+{
+case '(':
+push(symbol);
+break;
+case  ')':
+item=pop();
+while(item!='(')
+{
+postfix[pos]=item;
+item=pop();
+pos++;
+}
+break;
+case '^':
+case '+':
+case '-':
+case '*':
+case '/':
+{while(prece(stack[top])>prece(symbol))
+{
+item=pop();
+postfix[pos]=symbol;
+pos++;
+}}
+push(symbol);
+break;
+default :
+postfix[pos]=symbol;
+pos++;
+break;
+}
+}
+while(stack[top]!='#')
+{
+item=pop();
+postfix[pos]=item;
+pos++;
+}
+printf("The postfix Expression is : ");
+for(i=0;i<size;i++)
+{
+printf(" %c",postfix[i]);
+}
+}
+int prece(char symbol)
+{
+switch (symbol)
+{
+case '+':
+case '-': return 1;
+break;
+case '*':
+case '/': return 2;
+break;
+case '^': return 3;
+break;
+default : return 0;
+break;
+}
+}
+void push(char symbol)
+{
+top++;
+stack[top]=symbol;
+}
+int pop()
+{
+int a;
+a=top;
+top--;
+return stack[a];
+}

@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct link
+{
+int cof,exp;
+struct link *next;
+}*head1,*head2,*head3,*poly=NULL,*poly1=NULL,*poly2=NULL;
+void insert(struct link *node);
+void show(struct link *node);
+void add(struct link *node,struct link *node1);
+void main()
+{
+poly1=(struct link *)malloc(sizeof(struct link));
+head1=poly1;
+poly2=(struct link *)malloc(sizeof(struct link));
+head2=poly2;
+poly=(struct link *)malloc(sizeof(struct link));
+head3=poly;
+printf("First polynomial :-\n");
+insert(poly1);
+head1=poly1;
+printf("Second polynomial :-\n");
+insert(poly2);
+head2=poly2;
+add(poly1,poly2);
+printf("\nFirst polynomial is : ");
+show(head1);
+printf("\nSecond polynomial is : ");
+show(head2);
+printf("\nResultant polynomial is : ");
+show(head3);
+printf("\n");
+}
+void insert(struct link *node)
+{
+int i,l;
+printf("Enter the number of terms : ");
+scanf("%d",&l);
+
+for(i=1;i<=l;i++)
+{
+printf("Enter the cofficent and exponent of term %d : ",i);
+scanf("%d %d",&node->cof,&node->exp);
+node->next=(struct link *)malloc(sizeof(struct link));
+node=node->next;
+node->next=NULL;
+}
+}
+void show(struct link *node)
+{
+printf("%dx^%d",node->cof,node->exp);
+node=node->next;
+while(node->next!=NULL)
+{
+printf(" + %dx^%d",node->cof,node->exp);
+node=node->next;
+}
+}
+void add(struct link *node,struct link *node1)
+{
+poly1=head1;
+poly2=head2;
+while((poly1->next!=NULL)&&(poly2->next!=NULL))
+{
+if(poly1->exp==poly2->exp)
+{
+poly->exp=poly1->exp;
+poly->cof=poly1->cof+poly2->cof;
+poly1=poly1->next;
+poly2=poly2->next;
+}
+else if((poly1->exp)>(poly2->exp))
+{
+poly->exp=poly1->exp;
+poly->cof=poly1->cof;
+poly1=poly1->next;
+}
+else
+{
+poly->exp=poly2->exp;
+poly->cof=poly2->cof;
+poly2=poly2->next;
+}
+poly->next=(struct link *)malloc(sizeof(struct link));
+poly=poly->next;
+poly->next=NULL;
+}
+while(poly1->next!=NULL)
+{
+poly->exp=poly1->exp;
+poly->cof=poly1->cof;
+poly1=poly1->next;
+poly->next=(struct link *)malloc(sizeof(struct link));
+poly=poly->next;
+poly->next=NULL;
+}
+while(poly2->next!=NULL)
+{
+poly->exp=poly2->exp;
+poly->cof=poly2->cof;
+poly2=poly2->next;
+poly->next=(struct link *)malloc(sizeof(struct link));
+poly=poly->next;
+poly->next=NULL;
+}
+}

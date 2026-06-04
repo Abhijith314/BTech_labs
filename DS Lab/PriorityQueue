@@ -1,0 +1,96 @@
+#include<stdio.h>
+#define size 3
+void enqueue();
+void dequeue();
+void traversal();
+int f=-1,r=-1;
+struct q
+{
+int data,priority;
+}s[10],t[10];
+void main()
+{
+int c,a;
+do
+{
+printf("\t\t\t MENU \n\n\n 1:ENQUEUE\n 2:DEQUEUE\n 3:TRAVERSAL\n");
+printf("\n enter your option:");
+scanf("%d",&c);
+switch(c)
+{
+case 1:enqueue();break;
+case 2:dequeue();break;
+case 3:traversal();break;
+default:printf("invalid entry");
+break;
+}
+printf("\n do you want to continue:");
+scanf("%d",&a);
+}
+while(a==1);
+}
+void enqueue()
+{
+int i,j;
+if(f==0 && r==size-1)
+printf("\n queue overflow");
+else if(f==-1 && r==-1)
+{
+f++;
+r++;
+printf("enter the data and priority:");
+scanf("%d %d",&s[r].data,&s[r].priority);
+}
+else
+{
+r=r+1;
+printf("\n enter the data and priority:");
+scanf("%d %d",&s[r].data,&s[r].priority);
+for(i=0;i<r;i++)
+{
+for(j=i+1;j<=r;j++)
+{
+if(s[i].priority>s[j].priority)
+{
+t[i]=s[i];
+s[i]=s[j];
+s[j]=t[i];
+}
+}
+}
+}
+}
+void dequeue()
+{
+if(r==-1 && f==-1)
+{
+printf("\n queue underflow");
+}
+else if(f==r)
+{
+printf("\n %d is the deleted data and %d is its priority",s[f].data,s[f].priority);
+f=-1;
+r=-1;
+}
+else
+{
+printf("\n %d is the deleted data and %d is its priority",s[f].data,s[f].priority);
+f=f+1;
+}
+}
+void traversal()
+{
+int i;
+if(r==-1&&f==-1)
+{
+printf("\n queue underflow");
+}
+else
+{
+printf("\n DATA\t\t PRIORITY\n");
+for(i=f;i<=r;i++)
+{
+printf(" %d\t\t %d\n",s[i].data,s[i].priority);
+}
+}
+}
