@@ -1,0 +1,98 @@
+import java.util.Scanner;
+class Linkedlist
+{
+private Node head;
+class Node
+{
+private int data;
+private Node left;
+private Node right;
+public Node(int data)
+{
+this.data=data;
+this.left=null;
+this.right=null;
+}
+}
+
+public void insert(int data)
+{
+Node temp=new Node(data);
+if(head==null)
+{
+head=temp;
+}
+else
+{
+Node ptr=head;
+while(ptr.right!=null)
+{
+ptr=ptr.right;
+}
+ptr.right=temp;
+temp.left=ptr;
+}
+}
+
+public void delete()
+{
+int x=head.data;
+head=head.right;
+head.left=null;
+System.out.println("Deleted element is : "+x);
+}
+
+public void display()
+{
+if (head==null)
+System.out.println("List is Empty");
+else
+{
+Node ptr=head;
+System.out.print("The datas are : ");
+while(ptr!=null)
+{
+System.out.print(ptr.data+"\t");
+ptr=ptr.right;
+}
+System.out.println();
+}
+}
+}
+
+class DoublyLL
+{
+public static void main(String[]args)
+{
+Linkedlist list =new Linkedlist();
+Scanner s=new Scanner(System.in);
+String option="";
+while(!option.equals("4"))
+{
+System.out.print(" \t\tMENU\n\n1: Insertion at end\n2: Deletion at front\n3: Traversal\n");
+System.out.print("Enter the option :");
+option=s.nextLine();
+switch(option)
+{
+case "1":
+System.out.print("Enter the number to insert:");
+int data=s.nextInt();
+s.nextLine();
+list.insert(data);
+System.out.println("Data inserted successfully!");
+break;
+case "2":
+list.delete();
+break;
+case "3":
+list.display();
+break;
+case "4":
+break;
+default:
+System.out.println("Invalid option");
+break;
+}
+}
+}
+}

@@ -1,0 +1,40 @@
+// Abstract class Shape
+abstract class Shape {
+    public abstract int numberOfSides();
+}
+
+// Subclass Rectangle
+class Rectangle extends Shape {
+    @Override
+    public int numberOfSides() {
+        return 4;
+    }
+}
+
+// Subclass Triangle
+class Triangle extends Shape {
+    @Override
+    public int numberOfSides() {
+        return 3;
+    }
+}
+
+// Subclass Hexagon
+class Hexagon extends Shape {
+    @Override
+    public int numberOfSides() {
+        return 6;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape shape1 = new Rectangle();
+        Shape shape2 = new Triangle();
+        Shape shape3 = new Hexagon();
+
+        System.out.println("Number of sides in Rectangle: " + shape1.numberOfSides());
+        System.out.println("Number of sides in Triangle: " + shape2.numberOfSides());
+        System.out.println("Number of sides in Hexagon: " + shape3.numberOfSides());
+    }
+}

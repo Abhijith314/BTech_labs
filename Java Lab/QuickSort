@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+class QuickSort {
+    public static void main(String args[]) {
+        Scanner s = new Scanner(System.in);
+        int n;
+        System.out.println("Enter the number of strings: ");
+        n = s.nextInt();
+        s.nextLine(); // Consume the newline
+        String[] str = new String[n];
+        System.out.println("Enter the strings: ");
+        for (int i = 0; i < n; i++) {
+            str[i] = s.nextLine();
+        }
+        quicksort(str, 0, n - 1);
+        System.out.println("\nThe sorted strings are: ");
+        for (String str1 : str) {
+            System.out.print(str1 + "\n");
+        }
+    }
+
+    static void quicksort(String[] str, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(str, low, high);
+            quicksort(str, low, pivotIndex - 1);
+            quicksort(str, pivotIndex + 1, high);
+        }
+    }
+
+    static int partition(String[] str, int low, int high) {
+        String pivot = str[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (str[j].compareToIgnoreCase(pivot) <= 0) {
+                i++;
+                swap(str, i, j);
+            }
+        }
+        swap(str, i + 1, high);
+        return i + 1;
+    }
+
+    static void swap(String[] str, int i, int j) {
+        if (i != j) {
+            String temp = str[i];
+            str[i] = str[j];
+            str[j] = temp;
+        }
+    }
+}
