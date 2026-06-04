@@ -1,0 +1,49 @@
+#include<stdio.h>
+struct data{
+int p_no,bt_tm,pri,tat,wt;
+}a[20],temp;
+void main()
+{
+int n,i,tta=0,twt=0,ttat=0,j;
+double atat,awt;
+printf("Enter the no. of process : ");
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+printf("Enter the process no., Burst time and Priority : ");
+scanf("%d %d %d",&a[i].p_no,&a[i].bt_tm,&a[i].pri);
+}
+for(i=0;i<n;i++){
+for(j=i+1;j<n;j++){
+if(a[i].pri<a[j].pri){
+temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}}}
+for(i=0;i<n;i++){
+a[i].tat=tta+a[i].bt_tm;
+tta=tta+a[i].bt_tm;
+}
+for(i=0;i<n;i++){
+a[i].wt=a[i].tat-a[i].bt_tm;
+}
+for(i=0;i<n;i++){
+ttat=ttat+a[i].tat;
+twt=twt+a[i].wt;
+}
+atat=ttat/n;
+awt=twt/n;
+printf("\nProcess id\tBrust time\tPriority\tTA_T\t\tW_T\n");
+for(i=0;i<n;i++)
+{
+printf("P%d\t\t%d\t\t%d\t\t%d\t\t%d\n",a[i].p_no,a[i].bt_tm,a[i].pri,a[i].tat,a[i].wt);
+}
+printf("Average trun around time = %lf\n",atat);
+printf("Average waiting time = %lf\n",awt);
+printf("GANTT CHART\n");
+printf("0");
+for(i=0;i<n;i++){
+printf("\tP%d\t%d",a[i].p_no,a[i].tat);
+}
+printf("\n");
+}

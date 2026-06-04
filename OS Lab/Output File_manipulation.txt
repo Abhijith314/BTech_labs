@@ -1,0 +1,109 @@
+Enter the name of the directory : abhijith
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 1
+Enter the name of file : os
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 1
+Enter the name of file : coi
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 1
+Enter the name of file : dbms
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 2
+
+Directory name : abhijith
+Files are :  os coi dbms 
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 3
+Enter the file name to search : coi
+File 'coi' has been found at position 2.
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 4
+Enter the file name to delete : dbms
+File 'dbms' has been deleted
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 2
+
+Directory name : abhijith
+Files are :  os coi 
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 1
+Enter the name of file : coa
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 2
+
+Directory name : abhijith
+Files are :  os coi coa 
+
+		MENU
+
+1 : Create
+2 : Display
+3 : Search
+4 : delate
+5 : Exit
+Enter the option : 5
+

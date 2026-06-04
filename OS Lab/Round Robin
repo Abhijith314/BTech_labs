@@ -1,0 +1,55 @@
+#include <stdio.h>
+struct Process {
+int pid,at,bt,rbt,tat,wt;
+};
+int main()
+{
+int n,i,tq,ct=0,tat=0;
+printf("Enter number of process : ");
+scanf("%d",&n);
+struct Process p[n];
+for (i=0;i<n;i++){
+printf("Enter process id and burst time : ");
+scanf("%d %d",&p[i].pid,&p[i].bt);
+p[i].at=0;
+p[i].rbt=p[i].bt;
+}
+printf("Enter time quantum for Round Robin: ");
+scanf("%d",&tq);
+printf("\nGANTT CHART \n");
+printf("0");
+int comdp=0;
+while(comdp<n) {
+for(i=0;i<n;i++) {
+if(p[i].rbt>0) {
+if(p[i].rbt<=tq) {
+ct+=p[i].rbt;
+p[i].rbt=0;
+p[i].tat=ct-p[i].at;
+p[i].wt=p[i].tat-p[i].bt;
+comdp++;
+}
+else {
+ct+=tq;
+p[i].rbt-=tq;
+}
+printf("\tP%d\t%d",p[i].pid,ct);
+}
+}
+}
+printf("\n");
+float ttat=0,twt=0,avgtat,avgwt;
+for(i=0;i<n;i++) {
+ttat+=p[i].tat;
+twt+=p[i].wt;
+}
+avgtat=ttat/n;
+avgwt=twt/n;
+printf("\nProcess\tTurnaround Time\tWaiting Time\n");
+for(i=0;i<n;i++) {
+printf("P%d\t%d\t\t%d\n",p[i].pid,p[i].tat,p[i].wt);
+}
+printf("Average Turnaround Time : %f\n",avgtat);
+printf("Average Waiting Time: %f\n",avgwt);
+return 0;
+}

@@ -1,0 +1,49 @@
+#include <stdio.h>
+void worstFit(int bsize[],int m,int psize[],int n) {
+int allocate[n],i,j;
+for(i=0;i<n;i++) {
+allocate[i]=-1;
+}
+for(i=0;i<n;i++) {
+int worstIdx=-1;
+for(j=0;j<m;j++) {
+if(bsize[j]>=psize[i]) {
+if(worstIdx==-1||bsize[j]>bsize[worstIdx]) {
+worstIdx=j;
+}
+}
+}
+if(worstIdx!=-1) {
+allocate[i]=worstIdx;
+bsize[worstIdx]-=psize[i];
+}
+}
+printf("\nProcess No.\tProcess Size\tBlock no.\n");
+for(i=0;i<n;i++) {
+printf("%d\t\t%d\t\t",i+1,psize[i]);
+if(allocate[i]!=-1) {
+printf("%d",allocate[i]+1);
+}
+else {
+printf("Not Allocated");
+}
+printf("\n");
+}
+}
+void main() {
+int m,n,i;
+printf("Enter the number of memory blocks and processes: ");
+scanf("%d %d",&m,&n);
+int bsize[m],psize[n];
+printf("Enter the block sizes:\n");
+for(i=0;i<m;i++) {
+printf("%d : ",i+1);
+scanf("%d",&bsize[i]);
+}
+printf("Enter the process sizes:\n");
+for(i=0;i<n;i++) {
+printf("%d : ",i+1);
+scanf("%d",&psize[i]);
+}
+worstFit(bsize,m,psize,n);
+}
