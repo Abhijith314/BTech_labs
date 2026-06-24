@@ -60,7 +60,3 @@ mysql -u root -p database_name < script.sql
 **Abhijith Pratheesh**
 B.Tech Computer Science Engineering
 ```
-
-<FollowUp label="Want me to tailor this to your exact files?" query="Here is the list of folders and subjects in my BTech_labs repository. Can you update the README structure to match?"/>
-
-```
